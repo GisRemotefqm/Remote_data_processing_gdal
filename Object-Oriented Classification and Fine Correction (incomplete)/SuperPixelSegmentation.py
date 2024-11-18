@@ -55,8 +55,8 @@ def seed_image(img):
 
 
 if __name__ == "__main__":
-    img_path1 = r"J:\发送文件\Atmosphere\jjj\Result\Resample\230128_resample_clip.tif"
-    img_path2 = r"J:\发送文件\Atmosphere\jjj\Result\Resample\231031_resample_clip.tif"
+    img_path1 = r".\Atmosphere\jjj\Result\Resample\230128_resample_clip.tif"
+    img_path2 = r".\Atmosphere\jjj\Result\Resample\231031_resample_clip.tif"
 
     im_width, im_height, im_proj, im_geotrans, im_data = read_img(img_path1)
     im_width2, im_height2, im_proj2, im_geotrans2, im_data2 = read_img(img_path2)

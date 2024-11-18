@@ -124,10 +124,6 @@ def write_tif(data_list, projection, transform, outputPath):
 
 if __name__ == '__main__':
 
-    tifPath = r"J:\发送文件\Atmosphere\SLIC\230128_erfenlei_clip_class.tif"
-    outPath = r"J:\发送文件\Atmosphere\SLIC\230128_erfenlei_clip_class_markov.tif"
+    tifPath = r".\Atmosphere\SLIC\230128_erfenlei_clip_class.tif"
+    outPath = r".\Atmosphere\SLIC\230128_erfenlei_clip_class_markov.tif"
     MovmarkRandomField(tifPath, 2, 200, outPath)
-
-    # tifPath = r"J:\0KTYensemble\000 Chemical\nternalCalibration\20231031_reconstructed_resample.tif"
-    # outPath = r"J:\0KTYensemble\000 Chemical\nternalCalibration\20231031_MovRandomField.tif"
-    # MovmarkRandomField(tifPath, 2, 200, outPath)

@@ -56,7 +56,7 @@ def write_img(filename, im_proj, im_geotrans, im_data):
 
 def get_SLIC_deffirence(img_path1, img_path2):
 
-    temp_path = r"J:\发送文件\Atmosphere\SLIC\230128_SLIC.tif"
+    temp_path = r".\Atmosphere\SLIC\230128_SLIC.tif"
     im_width, im_height, im_proj, im_geotrans, im_data = read_img(img_path1)
     im_data = im_data[0:3]
     temp = im_data.transpose((2, 1, 0))
@@ -69,7 +69,7 @@ def get_SLIC_deffirence(img_path1, img_path2):
     write_img(temp_path, im_proj, im_geotrans, re0)
 
 
-    temp_path2 = r"J:\发送文件\Atmosphere\SLIC\231031_SLIC.tif"
+    temp_path2 = r".\Atmosphere\SLIC\231031_SLIC.tif"
     im_width2, im_height2, im_proj2, im_geotrans2, im_data2 = read_img(img_path2)
     im_data2 = im_data2[0:3]
     temp2 = im_data2.transpose((2, 1, 0))
@@ -81,7 +81,7 @@ def get_SLIC_deffirence(img_path1, img_path2):
     re02 = mark02.transpose((2, 1, 0))
     write_img(temp_path2, im_proj2, im_geotrans2, re02)
 
-    write_img(r'J:\发送文件\Atmosphere\SLIC\1031_segments_quick2.tif', im_proj2, im_geotrans2, segments_quick2.transpose((1, 0)))
+    write_img(r'.\Atmosphere\SLIC\1031_segments_quick2.tif', im_proj2, im_geotrans2, segments_quick2.transpose((1, 0)))
 
 
 def get_SLIC_attributeFeature(arr_index, tifArr):
@@ -276,18 +276,18 @@ def Predict(indexPath, tifPath, glcmPath, shpPath, model, outPath):
 if __name__ == "__main__":
 
 
-    indexPath = r"J:\发送文件\Atmosphere\SLIC\best\230128_rpc_clip_segments_quick2_segments=900_compact=7.tif"
-    tifPath = r"J:\发送文件\Atmosphere\jjj\Result\Resample\230128_resample_clip.tif"
-    glcmPath = r"J:\发送文件\Atmosphere\GLCM\230128_resample_clipdiss.tif"
-    csvPath = r'J:\发送文件\Atmosphere\TrainData\230128_TrainData.csv'
-    shpPath = r"J:\发送文件\Atmosphere\SLIC_FeaturePoint\231031_SLIC.shp"
+    indexPath = r".\Atmosphere\SLIC\best\230128_rpc_clip_segments_quick2_segments=900_compact=7.tif"
+    tifPath = r".\Atmosphere\jjj\Result\Resample\230128_resample_clip.tif"
+    glcmPath = r".\Atmosphere\GLCM\230128_resample_clipdiss.tif"
+    csvPath = r'.\Atmosphere\TrainData\230128_TrainData.csv'
+    shpPath = r".\Atmosphere\SLIC_FeaturePoint\231031_SLIC.shp"
     TrainData = GetTrainData(indexPath, tifPath, glcmPath, shpPath, csvPath)
 
-    indexPath2 = r"J:\发送文件\Atmosphere\SLIC\best\231031_rpc_clip_segments_quick2_segments=900_compact=7.tif"
-    tifPath2 = r"J:\发送文件\Atmosphere\jjj\Result\Resample\231031_resample_clip.tif"
-    glcmPath2 = r"J:\发送文件\Atmosphere\GLCM\231031_resample_clipdiss.tif"
-    csvPath2 = r'J:\发送文件\Atmosphere\TrainData\231031_TrainData.csv'
-    shpPath2 = r"J:\发送文件\Atmosphere\SLIC_FeaturePoint\231031_SLIC.shp"
+    indexPath2 = r".\Atmosphere\SLIC\best\231031_rpc_clip_segments_quick2_segments=900_compact=7.tif"
+    tifPath2 = r".\Atmosphere\jjj\Result\Resample\231031_resample_clip.tif"
+    glcmPath2 = r".\Atmosphere\GLCM\231031_resample_clipdiss.tif"
+    csvPath2 = r'.\Atmosphere\TrainData\231031_TrainData.csv'
+    shpPath2 = r".\Atmosphere\SLIC_FeaturePoint\231031_SLIC.shp"
     TrainData2 = GetTrainData(indexPath2, tifPath2, glcmPath2, shpPath2, csvPath2)
 
     trainData = np.concatenate([TrainData, TrainData2], axis=0)
@@ -336,14 +336,11 @@ if __name__ == "__main__":
     # light_search = TuneSearchCV(light, lgbm_dict, use_gpu=True, search_optimization='bayesian', max_iters=1, n_jobs=-1)
     # light_search.fit(trainX, trainY)
 
-    Predict(indexPath, tifPath, glcmPath, shpPath, xgb_search.best_estimator_, r'J:\发送文件\Atmosphere\SLICResult\20230128_result_xgb.tif')
-    Predict(indexPath2, tifPath2, glcmPath2, shpPath, xgb_search.best_estimator_, r'J:\发送文件\Atmosphere\SLICResult\20231031_result_xgb.tif')
+    Predict(indexPath, tifPath, glcmPath, shpPath, xgb_search.best_estimator_, r'.\Atmosphere\SLICResult\20230128_result_xgb.tif')
+    Predict(indexPath2, tifPath2, glcmPath2, shpPath, xgb_search.best_estimator_, r'.\Atmosphere\SLICResult\20231031_result_xgb.tif')
 
-    Predict(indexPath, tifPath, glcmPath, shpPath, Random_search.best_estimator_, r'J:\发送文件\Atmosphere\SLICResult\20230128_result_Random.tif')
-    Predict(indexPath2, tifPath2, glcmPath2, shpPath, Random_search.best_estimator_, r'J:\发送文件\Atmosphere\SLICResult\20231031_result_Random.tif')
+    Predict(indexPath, tifPath, glcmPath, shpPath, Random_search.best_estimator_, r'.\Atmosphere\SLICResult\20230128_result_Random.tif')
+    Predict(indexPath2, tifPath2, glcmPath2, shpPath, Random_search.best_estimator_, r'.\Atmosphere\SLICResult\20231031_result_Random.tif')
 
-    Predict(indexPath, tifPath, glcmPath, shpPath, et_search.best_estimator_, r'J:\发送文件\Atmosphere\SLICResult\20230128_result_Extra.tif')
-    Predict(indexPath2, tifPath2, glcmPath2, shpPath, et_search.best_estimator_, r'J:\发送文件\Atmosphere\SLICResult\20231031_result_Extra.tif')
-
-    # Predict(indexPath, tifPath, glcmPath, shpPath, light_search.best_estimator_, r'J:\发送文件\Atmosphere\SLICResult\20230128_result_light.tif')
-    # Predict(indexPath2, tifPath2, glcmPath2, shpPath, light_search.best_estimator_, r'J:\发送文件\Atmosphere\SLICResult\20231031_result_light.tif')
+    Predict(indexPath, tifPath, glcmPath, shpPath, et_search.best_estimator_, r'.\Atmosphere\SLICResult\20230128_result_Extra.tif')
+    Predict(indexPath2, tifPath2, glcmPath2, shpPath, et_search.best_estimator_, r'.\Atmosphere\SLICResult\20231031_result_Extra.tif')

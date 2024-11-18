@@ -45,7 +45,7 @@ def wavelet_recon(coefficients, wavelet):
 
 if __name__ == "__main__":
   # 读取图像
-  tifPath = r"J:\0KTYensemble\000 Chemical\nternalCalibration\20231031_clip.tif"
+  tifPath = r".\nternalCalibration\20231031_clip.tif"
   dataset = gdal.Open(tifPath)
   projection = dataset.GetProjection()
   transform = dataset.GetGeoTransform()

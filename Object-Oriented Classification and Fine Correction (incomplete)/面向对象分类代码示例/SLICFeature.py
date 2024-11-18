@@ -51,7 +51,7 @@ def write_img(filename, im_proj, im_geotrans, im_data):
 
 def get_SLIC_deffirence(img_path1, img_path2):
 
-    temp_path = r"J:\发送文件\Atmosphere\SLIC\230128_SLIC.tif"
+    temp_path = r".\Atmosphere\SLIC\230128_SLIC.tif"
     im_width, im_height, im_proj, im_geotrans, im_data = read_img(img_path1)
     im_data = im_data[0:3]
     temp = im_data.transpose((2, 1, 0))
@@ -64,7 +64,7 @@ def get_SLIC_deffirence(img_path1, img_path2):
     write_img(temp_path, im_proj, im_geotrans, re0)
 
 
-    temp_path2 = r"J:\发送文件\Atmosphere\SLIC\231031_SLIC.tif"
+    temp_path2 = r".\Atmosphere\SLIC\231031_SLIC.tif"
     im_width2, im_height2, im_proj2, im_geotrans2, im_data2 = read_img(img_path2)
     im_data2 = im_data2[0:3]
     temp2 = im_data2.transpose((2, 1, 0))
@@ -76,7 +76,7 @@ def get_SLIC_deffirence(img_path1, img_path2):
     re02 = mark02.transpose((2, 1, 0))
     write_img(temp_path2, im_proj2, im_geotrans2, re02)
 
-    write_img(r'J:\发送文件\Atmosphere\SLIC\1031_segments_quick2.tif', im_proj2, im_geotrans2, segments_quick2.transpose((1, 0)))
+    write_img(r'.\Atmosphere\SLIC\1031_segments_quick2.tif', im_proj2, im_geotrans2, segments_quick2.transpose((1, 0)))
 
 
 def get_SLIC_attributeFeature(arr_index, tifArr):
@@ -266,7 +266,7 @@ if __name__ == "__main__":
     indexPath = r".\data\SLIC\1031_segments_quick2.tif"
     tifPath = r".\data\Resample\231031_resample_clip.tif"
     glcmPath = r'.\data\GLCM\231031_resample_clip_glcmMEANBand4.tif'
-    csvPath = r'G:\KongTianYuan\XMensemble\data\TrainData.csv'
+    csvPath = r'.\data\TrainData.csv'
 
     TrainData = GetTrainData(indexPath, tifPath, glcmPath, csvPath)
     trainX, trainY = TrainData[:, :-1], TrainData[:, -1]

@@ -151,7 +151,7 @@ def fast_textural_features(glcm, levels=8, kernel_size=2):
 
 if __name__ == '__main__':
 
-    paths = glob.glob(r"K:\BMXM\peizhun\clip\*.tif")
+    paths = glob.glob(r".\clip\*.tif")
 
     for path in paths:
 
@@ -167,20 +167,20 @@ if __name__ == '__main__':
         max_, ent, mean, std, cont, diss, homo, asm, ene = fast_textural_features(rb_glcm, levels=17, kernel_size=7)
 
         write_tif(max_, pro, trans,
-                  os.path.join(r'K:\BMXM\peizhun\GLCM', os.path.basename(path)[:-4] + 'max_.tif'))
+                  os.path.join(r'.\GLCM', os.path.basename(path)[:-4] + 'max_.tif'))
         write_tif(ent, pro, trans,
-                  os.path.join(r'K:\BMXM\peizhun\GLCM', os.path.basename(path)[:-4] + 'ent.tif'))
+                  os.path.join(r'.\GLCM', os.path.basename(path)[:-4] + 'ent.tif'))
         write_tif(mean, pro, trans,
-                  os.path.join(r'K:\BMXM\peizhun\GLCM', os.path.basename(path)[:-4] + 'mean.tif'))
+                  os.path.join(r'.\GLCM', os.path.basename(path)[:-4] + 'mean.tif'))
         write_tif(std, pro, trans,
-                  os.path.join(r'K:\BMXM\peizhun\GLCM', os.path.basename(path)[:-4] + 'std.tif'))
+                  os.path.join(r'.\GLCM', os.path.basename(path)[:-4] + 'std.tif'))
         write_tif(cont, pro, trans,
-                  os.path.join(r'K:\BMXM\peizhun\GLCM', os.path.basename(path)[:-4] + 'cont.tif'))
+                  os.path.join(r'.\GLCM', os.path.basename(path)[:-4] + 'cont.tif'))
         write_tif(diss, pro, trans,
-                  os.path.join(r'K:\BMXM\peizhun\GLCM', os.path.basename(path)[:-4] + 'diss.tif'))
+                  os.path.join(r'.\GLCM', os.path.basename(path)[:-4] + 'diss.tif'))
         write_tif(homo, pro, trans,
-                  os.path.join(r'K:\BMXM\peizhun\GLCM', os.path.basename(path)[:-4] + 'homo.tif'))
+                  os.path.join(r'.\GLCM', os.path.basename(path)[:-4] + 'homo.tif'))
         write_tif(asm, pro, trans,
-                  os.path.join(r'K:\BMXM\peizhun\GLCM', os.path.basename(path)[:-4] + 'asm.tif'))
+                  os.path.join(r'.\GLCM', os.path.basename(path)[:-4] + 'asm.tif'))
         write_tif(ene, pro, trans,
-                  os.path.join(r'K:\BMXM\peizhun\GLCM', os.path.basename(path)[:-4] + 'ene.tif'))
+                  os.path.join(r'.\GLCM', os.path.basename(path)[:-4] + 'ene.tif'))

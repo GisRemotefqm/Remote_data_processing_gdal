@@ -152,12 +152,12 @@ def chazhi(tif_arr1, tif_arr2):
 
 if __name__ == "__main__":
 
-    tifPath = r"J:\发送文件\jjz\GF1\clip\GF1_PMS1_E117.1_N28.3_20230918_L1A13090694001-PAN1_rc_rpcortho_clip2_clip.tif"
-    outPath = r"J:\发送文件\jjz\GF1\reconstructed\20230918_reconstructed_resample.tif"
+    tifPath = r".\clip\GF1_PMS1_E117.1_N28.3_20230918_L1A13090694001-PAN1_rc_rpcortho_clip2_clip.tif"
+    outPath = r".\reconstructed\20230918_reconstructed_resample.tif"
     mutilWaveletsChange(tifPath, -1, 4, outPath)
 
 
-    tifPath = r"J:\发送文件\jjz\GF1\clip\GF1_PMS2_E117.3_N28.2_20230628_L1A0007366742-PAN_rc_rpcortho_clip2_clip.tif"
-    outPath = r"J:\发送文件\jjz\GF1\reconstructed\20230628_reconstructed_resample.tif"
+    tifPath = r".\clip\GF1_PMS2_E117.3_N28.2_20230628_L1A0007366742-PAN_rc_rpcortho_clip2_clip.tif"
+    outPath = r".\reconstructed\20230628_reconstructed_resample.tif"
     mutilWaveletsChange(tifPath, -1, 4, outPath)
 

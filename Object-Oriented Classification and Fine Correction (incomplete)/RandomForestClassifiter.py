@@ -306,34 +306,34 @@ def GetMinArr(Dataset1, Dataset2, outPath):
 if __name__ == '__main__':
 
     inputPath_dict = {
-        0: glob.glob(r'J:\000 化工厂\Classifier\build\*.tif'),
-        1: glob.glob(r'J:\000 化工厂\Classifier\forest\*.tif'),
+        0: glob.glob(r'.\Classifier\build\*.tif'),
+        1: glob.glob(r'.\Classifier\forest\*.tif'),
         # 3: glob.glob(r'J:\000 化工厂\Classifier\water\*.tif'),
-        2: glob.glob(r'J:\000 化工厂\Classifier\soil\*.tif'),
+        2: glob.glob(r'.\Classifier\soil\*.tif'),
     }
     train_x, test_x, train_y, test_y = readTrainData(inputPath_dict)
     forest, et, xgb, light = train(train_x, test_x, train_y, test_y)
 
-    joblib.dump(forest, r'J:\000 化工厂\Mymodel\forest.m')
-    model = joblib.load(r'J:\000 化工厂\Mymodel\forest.m')
-    ModelPredict(model, r"J:\000 化工厂\精校正结果\20231031_clip_resample.tif", r'J:\000 化工厂\Mymodel\ImageResult\20231031_clip_resample_rf.tif')
+    joblib.dump(forest, r'.\Mymodel\forest.m')
+    model = joblib.load(r'.\Mymodel\forest.m')
+    ModelPredict(model, r".\20231031_clip_resample.tif", r'.\Mymodel\ImageResult\20231031_clip_resample_rf.tif')
 
     # joblib.dump(et, r'J:\000 化工厂\Mymodel\et.m')
-    model = joblib.load(r'J:\000 化工厂\Mymodel\et.m')
-    ModelPredict(model, r"J:\000 化工厂\精校正结果\20231031_clip_resample.tif", r'J:\000 化工厂\Mymodel\ImageResult\20231031_clip_resample_et.tif')
+    model = joblib.load(r'.\Mymodel\et.m')
+    ModelPredict(model, r".\20231031_clip_resample.tif", r'.\ImageResult\20231031_clip_resample_et.tif')
 
     # joblib.dump(et, r'J:\000 化工厂\Mymodel\xgb.m')
-    model = joblib.load(r'J:\000 化工厂\Mymodel\xgb.m')
-    ModelPredict(model, r"J:\000 化工厂\精校正结果\20231031_clip_resample.tif", r'J:\000 化工厂\Mymodel\ImageResult\20231031_clip_resample_xgb.tif')
+    model = joblib.load(r'.\Mymodel\xgb.m')
+    ModelPredict(model, r".\20231031_clip_resample.tif", r'.\Mymodel\ImageResult\20231031_clip_resample_xgb.tif')
 
     # joblib.dump(light, r'J:\000 化工厂\Mymodel\light.m')
-    model = joblib.load(r'J:\000 化工厂\Mymodel\light.m')
-    ModelPredict(model, r"J:\000 化工厂\精校正结果\20231031_clip_resample.tif", r'J:\000 化工厂\Mymodel\ImageResult\20231031_clip_resample_lgbm.tif')
+    model = joblib.load(r'.\Mymodel\light.m')
+    ModelPredict(model, r".\20231031_clip_resample.tif", r'.\Mymodel\ImageResult\20231031_clip_resample_lgbm.tif')
 
-    Dataset1 = rw.get_tifDataset(r"J:\000 化工厂\Mymodel\ImageResult\20230128_clip_xgb.tif")
-    Dataset2 = rw.get_tifDataset(r"J:\000 化工厂\Mymodel\ImageResult\20231031_clip_resample_xgb.tif")
-    GetMinArr(Dataset1, Dataset2, r'J:\000 化工厂\Mymodel\ImageResult\cha.tif')
-    Dataset = rw.get_tifDataset(r'J:\000 化工厂\Mymodel\ImageResult\cha.tif')
+    Dataset1 = rw.get_tifDataset(r".\Mymodel\ImageResult\20230128_clip_xgb.tif")
+    Dataset2 = rw.get_tifDataset(r".\Mymodel\ImageResult\20231031_clip_resample_xgb.tif")
+    GetMinArr(Dataset1, Dataset2, r'.\Mymodel\ImageResult\cha.tif')
+    Dataset = rw.get_tifDataset(r'.\Mymodel\ImageResult\cha.tif')
     imgx, imgy = rw.get_RasterXY(Dataset)
     projection, transform = rw.get_GeoInformation(Dataset)
     arr = rw.get_RasterArr(Dataset, imgx, imgy)
@@ -342,4 +342,4 @@ if __name__ == '__main__':
     result, area = find_and_compute_areas(arr[0], 0.64)
 
 
-    rw.write_tif(result, projection, transform, r'J:\000 化工厂\Mymodel\ImageResult\shibie.tif')
+    rw.write_tif(result, projection, transform, r'.\Mymodel\ImageResult\shibie.tif')

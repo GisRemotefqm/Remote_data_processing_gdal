@@ -205,8 +205,8 @@ def defineSRS(reference_num):
 
 if __name__ == '__main__':
 
-    tifPath1 = r"J:\0KTYensemble\000 Chemical\nternalCalibration\20230128_clip.tif"
-    tifPath2 = r"J:\0KTYensemble\000 Chemical\nternalCalibration\20231031_clip_resample.tif"
+    tifPath1 = r".\nternalCalibration\20230128_clip.tif"
+    tifPath2 = r".\nternalCalibration\20231031_clip_resample.tif"
 
     tifDataset1, img1 = gdalReadImage(tifPath1)
 
@@ -223,4 +223,4 @@ if __name__ == '__main__':
     # print(srcPointLon[0], pwPointLon[0])
     # print(srcPointLat[0], pwPointLat[0])
     # print(srcPoint[0], pwPoint[0])
-    GCPCorrect(srcPoint, pwPointLon, pwPointLat, tifDataset2, r'J:\0KTYensemble\2020 黎巴嫩布鲁特港口\231212 jjz\231215_test.tif')
+    GCPCorrect(srcPoint, pwPointLon, pwPointLat, tifDataset2, r'.\231212 jjz\231215_test.tif')

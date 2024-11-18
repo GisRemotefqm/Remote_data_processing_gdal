@@ -49,7 +49,7 @@ def get_SLIC_deffirence(img_path1, img_path2):
     for kernel_size in range(3, 18, 2):
         for max_dist in range(1, 11):
             for radio in range(1, 10):
-                temp_path = r"J:\发送文件\Atmosphere\quickshift\230128_rpc_clip_quickShift_kernelSize=" + str(kernel_size) + "_maxDist=" + str(max_dist) + "radio=" + str(radio * 0.1) + ".tif"
+                temp_path = r".\Atmosphere\quickshift\230128_rpc_clip_quickShift_kernelSize=" + str(kernel_size) + "_maxDist=" + str(max_dist) + "radio=" + str(radio * 0.1) + ".tif"
                 im_width, im_height, im_proj, im_geotrans, im_data = read_img(img_path1)
                 im_data = im_data[:3]
                 temp = im_data.transpose((2, 1, 0))
@@ -60,10 +60,10 @@ def get_SLIC_deffirence(img_path1, img_path2):
                 re0 = mark0.transpose((2, 1, 0))
                 print(re0.shape)
                 write_img(temp_path, im_proj, im_geotrans, re0)
-                # write_img(r'J:\发送文件\Atmosphere\SLIC\230128_rpc_clip_segments_quick2_segments=' + str(segments) + '_compact=' + str(compact) + ".tif",
+                # write_img(r'.\Atmosphere\SLIC\230128_rpc_clip_segments_quick2_segments=' + str(segments) + '_compact=' + str(compact) + ".tif",
                 #           im_proj, im_geotrans, segments_quick.transpose((1, 0)))
 
-                temp_path2 = r"J:\发送文件\Atmosphere\quickshift\231031_rpc_clip_quickShift_rpc_clip_quickShift_kernelSize=" + str(kernel_size) + "_maxDist=" + str(max_dist) + "radio=" + str(radio * 0.1) + ".tif"
+                temp_path2 = r".\Atmosphere\quickshift\231031_rpc_clip_quickShift_rpc_clip_quickShift_kernelSize=" + str(kernel_size) + "_maxDist=" + str(max_dist) + "radio=" + str(radio * 0.1) + ".tif"
                 im_width2, im_height2, im_proj2, im_geotrans2, im_data2 = read_img(img_path2)
                 im_data2 = im_data2[:3]
                 temp2 = im_data2.transpose((2, 1, 0))
@@ -73,7 +73,7 @@ def get_SLIC_deffirence(img_path1, img_path2):
                 re02 = mark02.transpose((2, 1, 0))
                 write_img(temp_path2, im_proj2, im_geotrans2, re02)
 
-            # write_img(r'J:\发送文件\Atmosphere\SLIC\231031_rpc_clip_segments_quick2_segments=' + str(segments) + '_compact=' + str(compact) + ".tif",
+            # write_img(r'.\Atmosphere\SLIC\231031_rpc_clip_segments_quick2_segments=' + str(segments) + '_compact=' + str(compact) + ".tif",
             #           im_proj2, im_geotrans2, segments_quick2.transpose((1, 0)))
 
 
@@ -130,7 +130,7 @@ def PolygonizeTheRaster(inputfile, outputfile):
 
 if __name__ == "__main__":
 
-    img_path1 = r"J:\发送文件\Atmosphere\jjj\Result\Resample\230128_resample_clip.tif"
-    img_path2 = r"J:\发送文件\Atmosphere\jjj\Result\Resample\231031_resample_clip.tif"
+    img_path1 = r".\Atmosphere\jjj\Result\Resample\230128_resample_clip.tif"
+    img_path2 = r".\Atmosphere\jjj\Result\Resample\231031_resample_clip.tif"
 
     get_SLIC_deffirence(img_path1, img_path2)
