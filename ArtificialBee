@@ -1,0 +1,142 @@
+# --coding:utf-8--
+import numpy as np
+import random
+np.set_printoptions(suppress=True)
+
+
+class ArtBee(object):
+
+
+    def __init__(self, flower_num, dim, iter_max, bound_max, bound_min):
+        """
+        :param dim: 空间维度，参数数量
+        :param flower_num: 蜜源数量也是雇佣蜂的数量
+        :param iter_max: 迭代最大次数
+        :param bound_max: 上界
+        :param bound_min: 下界
+        """
+        self.flower_num = flower_num
+        self.iter_max = iter_max
+        self.bound_max = bound_max
+        self.bound_min = bound_min
+        self.dim = dim
+        self.search_limit = 0.5 * dim * flower_num
+        self.c = np.zeros((self.flower_num, 1))
+
+
+    def objectiveFunction(self, x):
+
+        if len(x.shape) >= 2:
+            y = []
+            for x_i in x:
+                x_i = np.power(x_i, 2)
+                y.append(np.sum(x_i))
+            y = np.array(y)
+        else:
+            y = np.sum(np.square(x))
+
+        return y
+
+
+    def main(self):
+        # 第一步 employ蜂在初始蜜源寻找
+        random_site = np.random.random(size=(self.flower_num, self.dim))
+        employ_bees_init = self.bound_max + random_site * (self.bound_min - self.bound_max)
+        result = self.objectiveFunction(employ_bees_init)
+        fit = np.zeros(result.shape)
+        best_reuslt = np.min(result)
+
+        # 第二步 跟随蜂在蜜源旁边寻找食物
+        for iter in range(self.iter_max):
+
+            for idx in range(employ_bees_init.shape[0]):
+
+                # 候选食物
+                not_i = [i for i in range(1, self.dim) if i != idx]
+                k = random.choice(not_i)
+                wait_choice_food = employ_bees_init[idx] + (-1 + random.random() * 2) * (
+                        employ_bees_init[idx] - employ_bees_init[k])
+                # 可能会产生越界问题
+                min_arg = np.argwhere(wait_choice_food < self.bound_min)
+                max_arg = np.argwhere(wait_choice_food > self.bound_max)
+                if min_arg.size > 0:
+                    for arg in min_arg:
+                        wait_choice_food[arg[1]] = self.bound_min[:, arg[1]]
+                if max_arg.size > 0:
+                    for arg in max_arg:
+                        wait_choice_food[arg[1]] = self.bound_max[:, arg[1]]
+
+                wait_result = self.objectiveFunction(wait_choice_food)
+
+                # 比较新产生的解是否小于原来的解，如果小于则替换
+                if wait_result <= result[idx]:
+
+                    employ_bees_init[idx] = wait_choice_food
+                    result[idx] = wait_result
+                    best_reuslt = np.min(result)
+                else:
+                    self.c[idx] += 1
+
+        # 第三步 轮盘赌，跟随蜂去寻找食物
+        # 计算适应度,似乎有很多方法
+        fit_gt_0 = np.argwhere(result >= 0)
+        if fit_gt_0.size > 0:
+            for arg in fit_gt_0:
+                fit[arg[0]] = 1 / 1 + result[arg[0]]
+        fit_lt_0 = np.argwhere(result < 0)
+        if fit_lt_0.size > 0:
+            for arg in fit_lt_0:
+                fit[arg[0]] = 1 / 1 + result[arg[0]]
+        p = fit / np.mean(fit)
+        p = p / np.sum(p)
+        for m in range(employ_bees_init.shape[0]):
+            # 轮盘赌的结果
+            idx = np.argwhere(np.cumsum(p) > random.random())[0]
+
+            not_i = [i for i in range(1, self.dim) if i != idx]
+            k = random.choice(not_i)
+            wait_choice_food = employ_bees_init[idx] + (-1 + random.random() * 2) * (
+                        employ_bees_init[idx] - employ_bees_init[k])
+            # 可能会产生越界问题
+            min_arg = np.argwhere(wait_choice_food < self.bound_min)
+            max_arg = np.argwhere(wait_choice_food < self.bound_max)
+            if np.all(min_arg):
+                for arg in min_arg:
+                    wait_choice_food[arg[1]] = self.bound_min[:, arg[1]]
+            if np.all(max_arg):
+                for arg in max_arg:
+                    wait_choice_food[arg[1]] = self.bound_max[:, arg[1]]
+
+            wait_result = self.objectiveFunction(wait_choice_food)
+
+            # 比较新产生的解是否小于原来的解，如果小于则替换
+            if wait_result <= result[idx]:
+
+                employ_bees_init[idx] = wait_choice_food
+                result[idx] = wait_result
+                best_reuslt = np.min(result)
+            else:
+                self.c[idx] += 1
+
+        # 第四步 新的食物源/侦察峰
+        new_search_arg = np.argwhere(self.c >= self.search_limit)
+        self.c = np.zeros(self.c.shape)
+        for arg in new_search_arg:
+
+            employ_bees_init[arg[1]] = self.bound_max + random.random() * (self.bound_min - self.bound_max)
+            employ_bees_init[arg[1]].reshape(1, self.dim)
+            result[arg[1]] = self.objectiveFunction(employ_bees_init[[arg[1]]])
+
+        best_reuslt = np.min(result)
+        arg = np.argwhere(result == best_reuslt)
+        parameter = employ_bees_init[arg[0]]
+
+        return parameter, best_reuslt
+
+
+if __name__ == '__main__':
+
+    art_bee = ArtBee(700, 5, 1000, np.array([[5, 10, 15, 25, 100]]), np.array([[-5, -10, -15, -25, -100]]))
+    parameter, best_result = art_bee.main()
+    print('parameter:', parameter)
+    print('result:', best_result)
